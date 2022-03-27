@@ -1,0 +1,2 @@
+defmodule Snippex do
+end

@@ -1,0 +1,1 @@
+alias Snippex.Core.{SnippetSpec, ValidateCode}
