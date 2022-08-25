@@ -24,3 +24,5 @@ snippex-*.tar
 
 .idea
 snippex.iml
+frontend/ui/node_modules
+frontend/ui/yarn.lock
