@@ -4,13 +4,17 @@ defmodule Snippex.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      {Snippex.ReadinessAgent, nil},
       SnippexWeb.Telemetry,
       {Phoenix.PubSub, name: Snippex.PubSub},
       SnippexWeb.Endpoint
     ]
 
     opts = [strategy: :one_for_one, name: Snippex.Supervisor]
-    Supervisor.start_link(children, opts)
+    ok_pid = Supervisor.start_link(children, opts)
+    Snippex.ReadinessAgent.set_ready()
+
+    ok_pid
   end
 
   @impl true
