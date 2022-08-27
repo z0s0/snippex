@@ -4,7 +4,14 @@ defmodule SnippexWeb do
       use Phoenix.Controller, namespace: SnippexWeb
 
       import Plug.Conn
+      import SnippexWeb.ControllerHelpers
+
       alias SnippexWeb.Router.Helpers, as: Routes
+
+      def send_json(conn, status, data), do:
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(status, Jason.encode!(data))
     end
   end
 

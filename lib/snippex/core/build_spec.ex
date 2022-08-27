@@ -1,16 +1,19 @@
 defmodule Snippex.Core.BuildSpec do
   alias Snippex.Core.{
-    SnippetSpec,
+    Snippet,
     BuildImage,
-    ValidateCode
+    ValidateCode,
+    SnippetContext
   }
 
-  @spec build(SnippetSpec.t()) :: :ok | {:error, String.t()}
-  def build(%SnippetSpec{} = spec) do
+  @spec build(Snippet.t()) :: :ok | {:error, String.t()}
+  def build(%Snippet{} = spec) do
     with :ok <- ValidateCode.validate(spec),
-         :ok <- BuildImage.from_spec(spec) do
+         :ok <- BuildImage.from_spec(spec),
+         _ <- SnippetContext.create_snippet(spec) do
       :ok
     else
+      {:error, e} = err -> err
       _ -> {:error, "bad"}
     end
   end
