@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :snippex, Snippex.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "snippex",
+  password: "snippex",
   hostname: "localhost",
   database: "snippex_dev",
   show_sensitive_data_on_connection_error: true,

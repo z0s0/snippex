@@ -1,8 +1,8 @@
 defmodule Snippex.Core.BuildImage do
-  alias Snippex.Core.SnippetSpec
+  alias Snippex.Core.Snippet
 
-  @spec from_spec(SnippetSpec.t()) :: {:ok, nil} | {:error, String.t()}
-  def from_spec(%SnippetSpec{}) do
-
+  @spec from_spec(Snippet.t()) :: {:ok, nil} | {:error, String.t()}
+  def from_spec(%Snippet{} =  spec) do
+    :ok
   end
 end

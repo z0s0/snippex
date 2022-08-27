@@ -1,7 +1,7 @@
 defmodule Snippex.Core.GenerateLink do
-  alias Snippex.Core.SnippetSpec
+  alias Snippex.Core.Snippet
 
-  @spec from_spec(SnippetSpec.t()) :: String.t()
-  def from_spec(%SnippetSpec{} = spec), do:
+  @spec from_spec(Snippet.t()) :: String.t()
+  def from_spec(%Snippet{} = spec), do:
     "#{spec.lang}123"
 end

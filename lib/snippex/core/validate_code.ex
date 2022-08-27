@@ -1,14 +1,16 @@
 defmodule Snippex.Core.ValidateCode do
-  alias Snippex.Core.SnippetSpec
+  alias Snippex.Core.Snippet
 
   @wrapper_module :"SnippexWrapper"
 
-  def validate(%SnippetSpec{lang: :elixir, content: code}) do
+  def validate(%Snippet{lang: :elixir, code: code}) do
      with :ok <- try_compile(:elixir, code),
           :ok <- unload(@wrapper_module) do
        :ok
      else
-       {:error, message} = e -> e
+       {:error, %SyntaxError{column: col, description: desc}} ->
+         {:error, "SyntaxError. column: #{col}, description: #{desc}"}
+
        :not_found -> {:error, "Module not found"}
      end
   end
@@ -29,10 +31,8 @@ defmodule Snippex.Core.ValidateCode do
   end
 
   defp unload(module) do
-    if :code.delete(module) do
-      :ok
-    else
-      :not_found
-    end
+    :code.purge(module)
+    :code.delete(module)
+    :ok
   end
 end

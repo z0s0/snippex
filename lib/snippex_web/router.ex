@@ -8,7 +8,8 @@ defmodule SnippexWeb.Router do
   scope "/api", SnippexWeb do
     pipe_through :api
 
-    post "/snippet", SnippetsController, :create
+    post "/snippets", SnippetsController, :create
+    get  "/snippets/:id", SnippetsController, :get
   end
 
   # Enables LiveDashboard only for development

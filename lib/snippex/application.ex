@@ -6,6 +6,7 @@ defmodule Snippex.Application do
     children = [
       {Snippex.ReadinessAgent, nil},
       SnippexWeb.Telemetry,
+      Snippex.Repo,
       {Phoenix.PubSub, name: Snippex.PubSub},
       SnippexWeb.Endpoint
     ]
